@@ -1,0 +1,111 @@
+/* ------------------------ */
+    /* shm_wrap
+  /* ------------------------ */
+  /* common */
+  .shm_active {
+    position: relative;
+  }
+  .shm_inner {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in;
+  }
+  @media screen and (max-width: 767px) {
+    .shm_inner {
+      transition: initial;
+    }
+  }
+  /* ボタンを上に表示 */
+  .shm_btn.shm_position--top {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 30%;
+  }
+  
+  .shm_positionTop-cover {
+    background-color: #fff;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      white 70%
+    );
+    background-color: transparent;
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+  }
+  .shm--open .shm_positionTop-cover {
+    display:none;
+  }
+  
+  /* ボタンを下に表示 */
+  .shm_btn.shm_position--bottom {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #fff;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      white 70%
+    );
+    background-color: transparent;
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+  }
+  .shm--open .shm_btn.shm_position--bottom {
+    justify-content: center;
+    align-items: flex-start;
+    background: none;
+    position: static;
+    margin-top: 1em;
+  }
+  /* ボタンの表示 */
+  .shm_btn button {
+    width: 30%;
+    color: #fff;
+    border: 2px solid;
+    border-radius: 50px;
+    display: block;
+    font-weight: bold;
+    padding: 12px 0;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .shm_btn button {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .shm_btn.shm_position--bottom a:hover {
+    opacity: 0.7;
+  }
+  
+  .shm_btn button.shm_btnTxt--open {
+    background: #ec8c0f;
+  }
+  
+  .shm_btn button.shm_btnTxt--close {
+    background: #188015;
+  }
+  
+  .shm_btn button.shm_btnTxt--open:before {
+    content: 'もっと見る ▼';
+    display: inline;
+  }
+  
+  .shm_btn button.shm_btnTxt--close:before {
+    content: '閉じる ▲';
+    display: inline;
+  }
+  

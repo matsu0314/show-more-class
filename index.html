@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- common -->
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/adjustment.css" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- / common -->
+
+    <!-- prism -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-tomorrow.min.css"
+      integrity="sha512-e1U1k78A6sKwL+S2D9GYnOblTfzMch6cdHvDJ/vvCU6XA8mWRpNJCAWnhmav1WjnYV7Q9u3jhRNrWJ8zr2+2oA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"
+      integrity="sha512-xQgsp+zSrzG4GofAYZbZ2FoEazT92XVX59Vb/mqFv2m3rlwd0YwWAZs7ZRqR4vAyPdpD9mQGKirbgUPV1v/sCw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- / prism -->
+
+    <!-- 独自ファイル -->
+    <link rel="stylesheet" type="text/css" href="./common.css" />
+    <link rel="stylesheet" type="text/css" href="./show_more.css" />
+    <script src="./show_more.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        const showmore1 = new ShowMore({
+          selector: "#showMore1", //セレクタ
+          closeBtnPositionTop: false,
+          headerHeightSp : 90,
+        });
+        const showmore = new ShowMore();
+      });
+    </script>
+
+    <!-- / 独自ファイル -->
+
+    <meta
+      id="viewport"
+      name="viewport"
+      content="width=device-width, minimum-scale=1, maximum-scale=1"
+    />
+    <meta charset="UTF-8" />
+    <title>
+      「もっと見る」ボタンのサンプル（クラスバージョン）
+    </title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <div class="logo">ロゴ</div>
+        <nav>
+          <ul>
+            <li>なび1</li>
+            <li>なび2</li>
+            <li>なび3</li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <h1>もっと見るボタンをJavaScriptで実装</h1>
+        <p>
+          <span class="marker">class="showmore_wrap"</span
+          >を設定した要素にもっと見るボタンを追加します。<br />以下は最も基本的な使い方です。
+        </p>
+        <pre
+          style="max-width: 86vw"
+        ><code class="language-javascript">window.addEventListener('load', () => {
+    const showmore = new ShowMore();
+  });</code></pre>
+
+        <p>初期値は次の通りです。</p>
+        <pre
+          style="max-width: 86vw"
+        ><code class="language-javascript">window.addEventListener('load', () => {
+  const showmore = new ShowMore({
+      selector: '.showmore_wrap', //セレクタ
+      prefix = "shm", // CSSのプレフィックス
+      displayShowHeightPc: 0.3, //最初に表示する要素の高さ（PC）
+      displayShowHeightSp: 0.2, //最初に表示する要素の高さ（SP）
+      closeBtnPositionTop:true, // 閉じるボタンを上に表示するか
+      headerHeightPc: 0, //ヘッダー分高さを調整（PC）
+      headerHeightSp: 0, //ヘッダー分高さを調整（SP）
+      showpc: true, // PCでもっと見るを実装
+      showsp: true,// SPでもっと見るを実装
+    });
+  });</code></pre>
+
+        <h2>▼ボタンを上に表示（.showmore_wrap）<br /></h2>
+        <div class="showmore_wrap list_wrap mt30">
+          <ul class="flex-list">
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+          </ul>
+        </div>
+        <!-- showmore_wrap -->
+
+        <h2>▼ボタンを下に表示（#showMore1）</h2>
+        <div class="list_wrap mt30" id="showMore1">
+          <ul class="flex-list">
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+          </ul>
+        </div>
+        <!-- showmore_wrap -->
+        <br />
+
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+      </main>
+
+      <footer id="footer" style="text-align: center; margin-top:60px;padding:20px">
+        <div class="copyright">
+          Copyright <span id="thisyear">2023</span> &copy; test.com
+        </div>
+      </footer>
+    </div>
+    <script
+      type="text/javascript"
+      language="JavaScript"
+      src="/js/common.js"
+    ></script>
+  </body>
+</html>
