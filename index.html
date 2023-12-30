@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <!-- common -->
-    <link rel="stylesheet" type="text/css" href="../css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="../css/common.css" />
-    <link rel="stylesheet" type="text/css" href="../css/adjustment.css" />
-
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <!-- / common -->
-
     <!-- prism -->
     <link
       rel="stylesheet"
@@ -35,15 +23,21 @@
     <script src="./show_more.js"></script>
     <script>
       window.addEventListener("load", () => {
-        const showmore1 = new ShowMore({
-          selector: "#showMore1", //セレクタ
-          closeBtnPositionTop: false,
-          headerHeightSp : 90,
-        });
+        // デフォルト（ボタンを下に表示）
         const showmore = new ShowMore();
+        // ボタンを下に表示（ヘッダーの高さ調整）
+        const showmore1 = new ShowMore({
+          selector: "#showMore1",
+          offsetYPc: 90,
+          offsetYSp: 90,
+        });
+        // ボタンを上に表示
+        const showmore2 = new ShowMore({
+          selector: "#showMore2",
+          closeBtnPosition: "top",
+        });
       });
     </script>
-
     <!-- / 独自ファイル -->
 
     <meta
@@ -52,9 +46,7 @@
       content="width=device-width, minimum-scale=1, maximum-scale=1"
     />
     <meta charset="UTF-8" />
-    <title>
-      「もっと見る」ボタンのサンプル（クラスバージョン）
-    </title>
+    <title>「もっと見る」ボタンのサンプル（クラスバージョン）</title>
   </head>
   <body>
     <div id="wrapper">
@@ -72,33 +64,41 @@
         <h1>もっと見るボタンをJavaScriptで実装</h1>
         <p>
           <span class="marker">class="showmore_wrap"</span
-          >を設定した要素にもっと見るボタンを追加します。<br />以下は最も基本的な使い方です。
+          >を設定した要素にもっと見るボタンを追加します。<br />show_moreのJSとCSSを読み込んだら、次のように設定します。
         </p>
         <pre
           style="max-width: 86vw"
-        ><code class="language-javascript">window.addEventListener('load', () => {
-    const showmore = new ShowMore();
-  });</code></pre>
+          data-title="html"
+        ><code class="language-markup">&lt;div class="showmore_wrap">
+  ...コンテンツ
+&lt;/div></code></pre>
 
+        <pre
+          style="max-width: 86vw"
+          data-title="JavaScript"
+        ><code class="language-javascript">window.addEventListener('load', () => {
+  const showmore = new ShowMore();
+});</code></pre>
         <p>初期値は次の通りです。</p>
         <pre
           style="max-width: 86vw"
+          data-title="JavaScript"
         ><code class="language-javascript">window.addEventListener('load', () => {
   const showmore = new ShowMore({
-      selector: '.showmore_wrap', //セレクタ
-      prefix = "shm", // CSSのプレフィックス
-      displayShowHeightPc: 0.3, //最初に表示する要素の高さ（PC）
-      displayShowHeightSp: 0.2, //最初に表示する要素の高さ（SP）
-      closeBtnPositionTop:true, // 閉じるボタンを上に表示するか
-      headerHeightPc: 0, //ヘッダー分高さを調整（PC）
-      headerHeightSp: 0, //ヘッダー分高さを調整（SP）
-      showpc: true, // PCでもっと見るを実装
-      showsp: true,// SPでもっと見るを実装
+    selector : ".showmore_wrap", //セレクタ
+    prefix : "shm", // CSSのプレフィックス
+    displayShowHeightPc : 0.3, //閉じた状態の要素の高さ（PC）
+    displayShowHeightSp : 0.2, //閉じた状態の要素の高さ（SP）
+    closeBtnPosition : "bottom", // 閉じるボタンの表示位置（bottom | top）
+    offsetYPc : 0, //ヘッダー分高さを調整（PC）
+    offsetYSp : 0, //ヘッダー分高さを調整（SP）
+    showPc : true, // PCでもっと見るを実装
+    showSp : true, // SPでもっと見るを実装
     });
-  });</code></pre>
+});</code></pre>
 
-        <h2>▼ボタンを上に表示（.showmore_wrap）<br /></h2>
-        <div class="showmore_wrap list_wrap mt30">
+        <h2>▼デフォルト（ボタンを下に表示）</h2>
+        <div class="showmore_wrap list_wrap">
           <ul class="flex-list">
             <li>
               <p>
@@ -193,11 +193,15 @@
               </p>
             </li>
           </ul>
+          <p style="margin-bottom: 0">code</p>
+          <pre
+            style="max-width: 86vw"
+          ><code class="language-javascript">const showmore1 = new ShowMore();</code></pre>
         </div>
         <!-- showmore_wrap -->
 
-        <h2>▼ボタンを下に表示（#showMore1）</h2>
-        <div class="list_wrap mt30" id="showMore1">
+        <h2>▼ボタンを下に表示（ヘッダーの高さ90px調整）</h2>
+        <div class="list_wrap" id="showMore1">
           <ul class="flex-list">
             <li>
               <p>
@@ -287,6 +291,113 @@
               </p>
             </li>
           </ul>
+          <p style="margin-bottom: 0">code</p>
+          <pre
+            style="max-width: 86vw"
+          ><code class="language-javascript">const showmore = new ShowMore({
+  offsetYPc : 90,
+  offsetYSp : 90,
+});</code></pre>
+        </div>
+        <!-- showmore_wrap -->
+
+        <h2>▼ボタンを上に表示</h2>
+        <div class="list_wrap" id="showMore2">
+          <ul class="flex-list">
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+          </ul>
+          <p style="margin-bottom: 0">code</p>
+          <pre
+            style="max-width: 86vw"
+          ><code class="language-javascript">const showmore = new ShowMore({
+  closeBtnPosition : "top",
+});</code></pre>
         </div>
         <!-- showmore_wrap -->
         <br />
@@ -308,16 +419,14 @@
         </p>
       </main>
 
-      <footer id="footer" style="text-align: center; margin-top:60px;padding:20px">
+      <footer
+        id="footer"
+        style="text-align: center; margin-top: 60px; padding: 20px"
+      >
         <div class="copyright">
           Copyright <span id="thisyear">2023</span> &copy; test.com
         </div>
       </footer>
     </div>
-    <script
-      type="text/javascript"
-      language="JavaScript"
-      src="/js/common.js"
-    ></script>
   </body>
 </html>
