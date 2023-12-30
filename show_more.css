@@ -78,6 +78,7 @@
     text-decoration: none;
     box-sizing: border-box;
     transition: all 0.3s ease-in;
+    cursor: pointer;
   }
   
   @media screen and (max-width: 767px) {
