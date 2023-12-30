@@ -7,20 +7,20 @@ class ShowMore {
       prefix = "shm",
       displayShowHeightPc = 0.3,
       displayShowHeightSp = 0.2,
-      closeBtnPositionTop = true,
-      headerHeightPc = 0,
-      headerHeightSp = 0,
-      showpc = true,
-      showsp = true,
+      closeBtnPosition = "bottom",
+      offsetYPc = 0,
+      offsetYSp = 0,
+      showPc = true,
+      showSp = true,
     } = options;
     (this.targetShowWrap = selector),
       (this.displayShowHeightPc = displayShowHeightPc),
       (this.displayShowHeightSp = displayShowHeightSp),
-      (this.closeBtnPositionTop = closeBtnPositionTop),
-      (this.headerHeightPc = headerHeightPc),
-      (this.headerHeightSp = headerHeightSp),
-      (this.showPc = showpc),
-      (this.showSp = showsp),
+      (this.closeBtnPosition = closeBtnPosition),
+      (this.headerHeightPc = offsetYPc),
+      (this.headerHeightSp = offsetYSp),
+      (this.showPc = showPc),
+      (this.showSp = showSp),
       // アプリ内で使用するクラス名を管理
       (this.prefix = prefix),
       (this.classes = {}),
@@ -91,19 +91,20 @@ class ShowMore {
   // スクロール位置を管理
   _scrollObserver(targetInner, headerHeight, displayState) {
     const observer = new ResizeObserver((entries) => {
-      let showmoreToggle = entries[0].target.parentNode.querySelector(
+      const showmoreToggle = entries[0].target.parentNode.querySelector(
         `.${this.classes.btn}`
       );
-      let btnTopPosition = this._getOffsetTop(showmoreToggle);
-      if (this.closeBtnPositionTop == false) {
+      const btnTopPosition = this._getOffsetTop(showmoreToggle);
+      if (this.closeBtnPosition === "bottom") {
         window.scroll({
           top: btnTopPosition - Number(headerHeight),
           // behavior: 'smooth',
         });
-        // 1秒後に監視を解除
+
+        // 0.3秒後に監視を解除
         setTimeout(() => {
           observer.disconnect();
-        }, 1000);
+        }, 300);
       }
     });
 
@@ -178,8 +179,8 @@ class ShowMore {
     self
   ) {
     const showBtn = this;
-    let isOpen = showBtn.classList.contains(self.classes.openLink);
-    let isClose = showBtn.classList.contains(self.classes.closeLink);
+    const isOpen = showBtn.classList.contains(self.classes.openLink);
+    const isClose = showBtn.classList.contains(self.classes.closeLink);
 
     if (isOpen) {
       self._targetOpen(targetContent, targetShowHeight);
@@ -208,16 +209,16 @@ class ShowMore {
     const createShowToggleButton = document.createElement("button");
     createShowToggleButton.type = "button";
 
-    const BtnClassName = this.closeBtnPositionTop
+    const btnClassName = this.closeBtnPosition === "top"
       ? this.classes.positionTop
       : this.classes.positionBottom;
 
-    createShowToggle.classList.add(this.classes.btn, BtnClassName);
+    createShowToggle.classList.add(this.classes.btn, btnClassName);
     createShowToggleButton.classList.add(this.classes.openLink);
     createShowToggle.appendChild(createShowToggleButton);
 
     // ボタンを要素のトップに配置
-    if (BtnClassName == this.classes.positionTop) {
+    if (btnClassName == this.classes.positionTop) {
       showmoreInner.before(createShowToggle);
 
       if (targetWrap.querySelector(`.${this.classes.btnBottom}`) == null) {
@@ -227,7 +228,7 @@ class ShowMore {
       }
 
       // ボタンを要素の下に配置
-    } else if (BtnClassName == this.classes.positionBottom) {
+    } else if (btnClassName == this.classes.positionBottom) {
       targetWrap.appendChild(createShowToggle);
     }
   }
